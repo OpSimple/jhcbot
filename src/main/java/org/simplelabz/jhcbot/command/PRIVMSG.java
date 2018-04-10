@@ -90,14 +90,17 @@ public class PRIVMSG implements Command,ServiceAdapter
                     ChatService cs = ChatService.createChatService(chan, Conf.NAME, Conf.PASSWORD, ev.getChat(), ev.getData(), this);
                     cs.execute();
                 }
-                else if(!ev.getText().contains("SHOW"))
+                if(ev.getData().getCallType()==ParsedData.CHAT)
                 {
-                    ev.reply("I've some private messages for you! Do you wanna see them?\rif yes, reply me with SHOW!");
-                }
-                else if(ev.getText().contains("SHOW"))
-                {
-                    ev.reply("Now, join within 60s to read the message!");
-                    ev.getChat().invite(ev.getNick());
+                    if(ev.getText().contains("SHOW"))
+                    {
+                        ev.reply("Now, join within 60s to read the message!");
+                        ev.getChat().invite(ev.getNick());
+                    }
+                    else
+                    {
+                        ev.reply("I've some private messages for you! Do you wanna see them?\rif yes, reply me with SHOW!");
+                    }
                 }
             }
             else if(ev.getData().getCallType()==ParsedData.INVITE)
