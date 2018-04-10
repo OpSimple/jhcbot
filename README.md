@@ -3,7 +3,7 @@ A simple bot for https://hack.chat/ in java
 
 
 ## Download
-Download the latest executable jar [JHCBot v1.0.2](https://github.com/OpSimple/jhcbot/releases/download/v1.0.2/jhcbot-latest.jar)
+Download the latest executable jar [JHCBot v1.0.5](https://github.com/OpSimple/jhcbot/releases/download/v1.0.5/jhcbot-1.0.5.jar)
 
 ### Sources
 You can download source code releases from [Github Releases](https://github.com/OpSimple/jhcbot/releases)
