@@ -1,0 +1,46 @@
+#!/usr/bin/java bsh.Interpreter
+// Simple bean script
+
+import org.simplelabz.jhcbot.command.Command;
+import org.simplelabz.jhcbot.command.event.CommandEvent;
+
+PUNCH()
+{
+     public String name()
+     {
+          return "Punch";
+     }
+     
+     public String call()
+     {
+          return "punch";
+     }
+     
+     public String desc()
+     {
+          return "Knock em down!";
+     }
+     
+     public boolean isHidden()
+     {
+		 return false;
+	 }
+     
+     public void action(CommandEvent ev)
+     {
+     	 String[] args = ev.getArgs();
+     	 if(args.length==0)return;
+         ev.send("@"+ev.getNick()+" punches "+args[0]+" and knocks them DOWNN!");
+     }
+     
+     public boolean listens()
+     {
+          return false;
+     }
+     public void listen(CommandEvent ev)
+     {
+          //nothing to do here
+     }
+     
+     return this;
+}

@@ -1,0 +1,44 @@
+#!/usr/bin/java bsh.Interpreter
+// Simple bean script
+
+import org.simplelabz.jhcbot.command.Command;
+import org.simplelabz.jhcbot.command.event.CommandEvent;
+
+LOL()
+{
+     public String name()
+     {
+          return "LOL";
+     }
+     
+     public String call()
+     {
+          return "lol";
+     }
+     
+     public String desc()
+     {
+          return "A big and loud laugh! LOL!";
+     }
+     
+     public boolean isHidden()
+     {
+		 return false;
+	 }
+     
+     public void action(CommandEvent ev)
+     {
+     	 ev.send("$\\Huge LOL$");
+     }
+     
+     public boolean listens()
+     {
+          return false;
+     }
+     public void listen(CommandEvent ev)
+     {
+          //nothing to do here
+     }
+     
+     return this;
+}

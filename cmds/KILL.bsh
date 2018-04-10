@@ -1,0 +1,46 @@
+#!/usr/bin/java bsh.Interpreter
+// Simple bean script
+
+import org.simplelabz.jhcbot.command.Command;
+import org.simplelabz.jhcbot.command.event.CommandEvent;
+
+KILL()
+{
+     public String name()
+     {
+          return "KILL";
+     }
+     
+     public String call()
+     {
+          return "kill";
+     }
+     
+     public String desc()
+     {
+          return "I'M NOT GONNA SPARE EM TODAY!";
+     }
+     
+     public boolean isHidden()
+     {
+		 return false;
+	 }
+     
+     public void action(CommandEvent ev)
+     {
+     	 String[] args = ev.getArgs();
+     	 if(args==null)return;
+         ev.send("@"+ev.getNick()+" killed "+args[0]);
+     }
+     
+     public boolean listens()
+     {
+          return false;
+     }
+     public void listen(CommandEvent ev)
+     {
+          //nothing to do here
+     }
+     
+     return this;
+}

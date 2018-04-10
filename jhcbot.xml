@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>JHCbot v1.0 Configuration</comment>
+
+<!-- Enter the Server URI ex: ws://localhost:6060 -->
+<entry key="URI">wss://hack.chat/chat-ws</entry>
+
+<!-- Enter some characters for the art -->
+<entry key="ART">$\LARGE{(/)}$</entry>
+
+<!-- Choose a trigger  -->
+<entry key="TRIGGER">~</entry>
+
+<!-- Choose a nickname for the bot.
+     Max length of the nick should be 24 characters.
+     Allowed characters are from a-z , A-Z , 0-9 and _ only
+-->
+<entry key="NAME">JavaBot</entry>
+
+<!-- Choose a password to get a trip on hack.chat  -->
+<entry key="PASSWORD">pass</entry>
+
+<!-- Enter the names of channels to join the bot, seperate them with semi colons (;)
+     At least one channel name is required to run the bot.
+-->
+<entry key="CHANNELS">test</entry>
+
+<!-- Enter a trip to identify the bot's admin  -->
+<entry key="ADMIN">11dnxI</entry>
+
+<!-- Enter some trips to allow them as admins  -->
+<entry key="TRIPS">C8t8j6</entry>
+
+<!-- Enter some text for the bot's banner  -->
+<entry key="BANNER">${ART} ${NAME} is online now!</entry>
+
+<!-- Put all extra commands' lowercase names here  -->
+<entry key="EXTCMDS">slap;confused;shrug;suicide;kill;lol;punch;stare;lenny</entry>
+
+<!-- An extra directry/folder to include commands -->
+<!--entry key="CMDSDIR">commands</entry-->
+
+<!-- A directry/folder to store bot's data  -->
+<!--entry key="DATADIR">botdata</entry-->
+
+<!-- Maximum nos of bot's allowed  -->
+<!--entry key="MAXBOTS">8</entry-->
+
+<!-- Maximum nos of threads to be used  -->
+<!--entry key="MAXTHREADS">200</entry-->
+
+<!-- All other config values can be defined below  -->
+<entry key="GOOGLE_API_KEY">ADD-YOUR-GOOGLE-API-KEY</entry>
+<entry key="GOOGLE_CX_ID">ADD-YOUR-GOOGLE-CUSTOM-SEARCH-ID</entry>
+
+</properties>

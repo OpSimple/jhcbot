@@ -1,0 +1,44 @@
+#!/usr/bin/java bsh.Interpreter
+// Simple bean script
+
+import org.simplelabz.jhcbot.command.Command;
+import org.simplelabz.jhcbot.command.event.CommandEvent;
+
+CONFUSED()
+{
+     public String name()
+     {
+          return "Confused face";
+     }
+     
+     public String call()
+     {
+          return "confused";
+     }
+     
+     public String desc()
+     {
+          return "Confused face";
+     }
+     
+     public boolean isHidden()
+     {
+		 return false;
+	 }
+     
+     public void action(CommandEvent ev)
+     {
+     	 ev.send("(｡>﹏<｡)");
+     }
+     
+     public boolean listens()
+     {
+          return false;
+     }
+     public void listen(CommandEvent ev)
+     {
+          //nothing to do here
+     }
+     
+     return this;
+}
