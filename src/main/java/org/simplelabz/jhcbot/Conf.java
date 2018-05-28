@@ -94,6 +94,10 @@ public class Conf
             if(maxbots!=null)MAX_BOTS = Integer.parseInt(maxbots);
             if(maxthreads!=null)MAX_THREADS_LIMIT = Integer.parseInt(maxthreads);
         }
+        else
+        {
+            Utils.showError("No jhcbot.properties or jhcbot.xml file exists!");
+        }
 
         if(conf!=null)
         {

@@ -10,7 +10,7 @@ import org.simplelabz.jhcbot.command.event.CommandEvent;
 
 /**
  *
- * @author rajnish
+ * @author simple
  */
 public class SOURCES implements Command
 {
