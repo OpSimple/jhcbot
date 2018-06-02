@@ -89,7 +89,6 @@ public class LSCHAN implements Command
                         JsonObject json = Json.parse(msg).asObject();
                         if("onlineSet".equals(json.getString("cmd", "error")))
                         {
-                            ws.disconnect();
                             List<JsonValue> users = json.asObject().get("nicks").asArray().values();
                             Iterator<JsonValue> itr = users.iterator();
                             
@@ -104,13 +103,13 @@ public class LSCHAN implements Command
                                 count++;*/
                             }
                             if((users.size()-1)==0)
-                                send = " (empty)";
+                                send = send + " (empty)";
                             else
                                 send = send.substring(0, send.length()-2);
                             
                             parent.send(send);
-                            
                         }
+                        ws.disconnect();
                     }
                     
                     @Override

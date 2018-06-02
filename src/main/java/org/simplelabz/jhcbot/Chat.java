@@ -324,7 +324,7 @@ public class Chat extends WebSocketAdapter
     
     /**
      * Send: <code>{ cmd: 'kick', nick: 'nick' }</code>
-     * @param nick a nick to ban
+     * @param nick a nick to kick
      */
     public void kick(String nick)
     {

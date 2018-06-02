@@ -25,7 +25,7 @@ public class Bot
         //General bot commands
         "h", "help", "info", "about", "afk", "amsg", "msg", "bsh", "lschan", "lsadmins", "invite", "lsbots", "time",
         "wttr", "ipinfo", "ping", "uptime", "echo", "g", "google", "jokes", "ytb", "hcstats", "privmsg","talk",
-        "urban","math", "js", "glite", "sources",
+        "urban","math", "js", "glite", "sources","wiki",
         //Admin bot commands
         "killbot","mkadmin", "rmadmin", "ban", "unban", "enable" , "disable", "leave", "stop","calm","health"
     };

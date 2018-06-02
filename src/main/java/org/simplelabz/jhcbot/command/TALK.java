@@ -80,7 +80,6 @@ public class TALK implements Command
         if(!values.containsKey("USER"))
         {
             values.setProperty("USER", ev.getNick());
-            values.setProperty("TRIP", ev.getTrip());
             return;
         }
         values.replace("USER", ev.getNick());
