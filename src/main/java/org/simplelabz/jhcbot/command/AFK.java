@@ -58,7 +58,7 @@ public class AFK implements Command
     {
         //Checks
         //Check for call type
-        if(!ArrayUtils.contains(CALLS, ev.getData().getCallType()))return;
+        if(!ArrayUtils.contains(CALLS, ev.getData().getCallType()) || ev.getTriggeredCommand()!=null)return;
         //Check if current command was afk
         if(ev.getText().trim().startsWith(Conf.TRIG+call()))return;
         //init datastore

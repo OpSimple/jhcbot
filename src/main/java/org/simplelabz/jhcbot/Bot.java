@@ -257,24 +257,25 @@ public class Bot
             logErr(dat.getText());
             System.exit(2);//Exit with error
         }
+        
+        //Check for a called command by user
+        Command command= null;
+        if(dat.getText().startsWith(Conf.TRIG))
+        {
+            for(String cmd : COMMANDS)
+            {
+                Command com = callCommand(cmd);
+                if(com!=null && hasCommand(dat.getText(), com.call()))
+                {
+                    logInfo("@"+dat.getNick()+" => "+dat.getText());
+                    command = com;
+                }
+            }
+            event.setTriggeredCommand(command);
+        }
+        
         // Begin commands listenings
         startListening(event);
-        
-        //Check for regex (save res)
-        if(!dat.getText().startsWith(Conf.TRIG))
-            return;
-        
-        Command command= null;
-        //Check for given command
-        for(String cmd : COMMANDS)
-        {
-            Command com = callCommand(cmd);
-            if(com!=null && hasCommand(dat.getText(), com.call()))
-            {
-                logInfo("@"+dat.getNick()+" => "+dat.getText());
-                command = com;
-            }
-        }
         
         //Run the detected command in a new thread!
         if(command!=null && !command.isHidden() && isRunning)

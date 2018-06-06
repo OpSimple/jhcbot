@@ -22,6 +22,7 @@ public class CommandEvent implements Cloneable
     private Chat chat;
     private ParsedData data;
     private Command command ;
+    private Command trigCmd;
     private Bot bot;
     
     public CommandEvent(Conf config, Chat chat, Bot bot, ParsedData data)
@@ -33,13 +34,38 @@ public class CommandEvent implements Cloneable
         this.command = null;
     }
     
+    /**
+     * Set the command for this event
+     * @param com 
+     */
     public void setCommand(Command com)
     {
         this.command = com;
     }
+    /**
+     * Get the command for this event
+     * @return 
+     */
     public Command getCommand()
     {
         return command;
+    }
+    
+    /**
+     * Sets the command called by the user
+     * @param com 
+     */
+    public void setTriggeredCommand(Command com)
+    {
+        this.trigCmd = com;
+    }
+    /**
+     * Get the command called by the user
+     * @return 
+     */
+    public Command getTriggeredCommand()
+    {
+        return this.trigCmd;
     }
     
     /**
