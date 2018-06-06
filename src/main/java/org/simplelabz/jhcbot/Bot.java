@@ -260,7 +260,7 @@ public class Bot
         
         //Check for a called command by user
         Command command= null;
-        if(dat.getText().startsWith(Conf.TRIG))
+        if(dat.getCallType()==ParsedData.CHAT && dat.getText().startsWith(Conf.TRIG))
         {
             for(String cmd : COMMANDS)
             {
