@@ -1,19 +1,15 @@
 package org.simplelabz.jhcbot.command;
 
-import com.eclipsesource.json.Json;
 import com.eclipsesource.json.JsonObject;
-import com.eclipsesource.json.JsonValue;
-import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.net.ssl.HttpsURLConnection;
 import org.simplelabz.jhcbot.Chat.ParsedData;
 import org.simplelabz.jhcbot.command.event.CommandEvent;
+import org.simplelabz.jhcbot.command.svc.GoogleSvc;
 
 /**
  *
@@ -24,7 +20,6 @@ public class YTB implements Command
     private final String    YTBURLREGEX = "^(https?)?(://)?(www.)?(m.)?((youtube.com)|(youtu.be))/";
     private final String[]  VIDEOREGEX = { "\\?vi?=([^&]*)","watch\\?.*v=([^&]*)", "(?:embed|vi?)/([^/?]*)", "^([A-Za-z0-9\\-]*)"};
     private final String    URLSREGEX = "\\b(https)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
-    private final String    APIURL = "https://www.googleapis.com/youtube/v3/videos?part=id%2C+snippet%2C+contentDetails%2C+statistics&key=";
     
     @Override
     public String name()
@@ -94,7 +89,7 @@ public class YTB implements Command
     @Override
     public void action(CommandEvent ev)
     {
-        
+        //Do nothing
     }
     
     @Override
@@ -114,19 +109,7 @@ public class YTB implements Command
                     {
                         String yurl = itr.next();
                         String id = extractVideoID(yurl);
-                        String surl = APIURL+GOOGLE.GOOGLE_KEY+"&id="+id;
-                        URL url = new URL(surl);
-                        HttpsURLConnection con = (HttpsURLConnection)url.openConnection();
-                        JsonObject json = Json.parse(new java.io.InputStreamReader(con.getInputStream())).asObject();
-                        if(json.getString("error", null)!=null)
-                        {
-                            JsonObject err = json.get("error").asObject();
-                            ev.sendError(err.get("code").asInt()+"  "+err.get("message").asString());
-                            continue;
-                        }
-                        JsonValue items = json.get("items");
-                        if(items==null || items.asArray().isEmpty())return;
-                        JsonObject item = items.asArray().get(0).asObject();
+                        JsonObject item = GoogleSvc.getYoutubeDetails(id);
                         JsonObject snippet = item.get("snippet").asObject();
                         chan = snippet.getString("channelTitle", "");
                         title = snippet.getString("title", "");
@@ -137,7 +120,7 @@ public class YTB implements Command
                     ev.send("[$\\red{\\mathsf{Youtube}}$] @"+chan+": "+title+" (Duration: "+duration+", Views: "+views+")");
                 }
             }
-            catch(IOException ex)
+            catch(GoogleSvc.GoogleSvcException ex)
             {
                 Logger.getLogger(YTB.class.getName()).log(Level.SEVERE, null, ex);
             }

@@ -32,6 +32,7 @@ public class CommandEvent implements Cloneable
         this.data = data;
         this.bot = bot;
         this.command = null;
+        this.trigCmd = null;
     }
     
     /**

@@ -1,18 +1,12 @@
 package org.simplelabz.jhcbot.command;
 
-import com.eclipsesource.json.Json;
 import com.eclipsesource.json.JsonArray;
 import com.eclipsesource.json.JsonObject;
 import com.eclipsesource.json.JsonValue;
-import java.io.IOException;
-import java.net.URL;
-import java.net.URLEncoder;
 import java.util.Iterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.net.ssl.HttpsURLConnection;
 import org.simplelabz.jhcbot.Conf;
 import org.simplelabz.jhcbot.command.event.CommandEvent;
+import org.simplelabz.jhcbot.command.svc.GoogleSvc;
 
 /**
  *
@@ -20,14 +14,6 @@ import org.simplelabz.jhcbot.command.event.CommandEvent;
  */
 public class GOOGLE implements Command
 {
-    public static String      GOOGLE_KEY   ;
-    public static String      GOOGLE_CX_ID ;
-    
-    static
-    {
-        updateGoogleKeys();
-    }
-    
     private int ITEMS = 3;
     
     @Override
@@ -93,25 +79,7 @@ public class GOOGLE implements Command
         
         try
         {
-            String urlstr = "https://www.googleapis.com/customsearch/v1?key="
-                    +GOOGLE_KEY+"&cx="+GOOGLE_CX_ID+"&q="+URLEncoder.encode(args, "UTF-8");
-            URL url = new URL(urlstr);
-            HttpsURLConnection con = (HttpsURLConnection)url.openConnection();
-            
-            JsonObject json = Json.parse(new java.io.InputStreamReader(con.getInputStream())).asObject();
-            if(json.getString("error", null)!=null)
-            {
-                JsonObject err = json.get("error").asObject();
-                ev.sendError(err.get("code").asInt()+"  "+err.get("message").asString());
-                return;
-            }
-            JsonValue get = json.get("items");
-            if(get==null || get.asArray().isEmpty())
-            {
-                ev.send("No results found for "+args+" !");
-                return;
-            }
-            JsonArray items = get.asArray();
+            JsonArray items = GoogleSvc.search(args);
             Iterator<JsonValue> itr = items.values().iterator();
             for(int i = 1; itr.hasNext() ;i++)
             {
@@ -123,9 +91,9 @@ public class GOOGLE implements Command
             }
             ev.send(send);
         }
-        catch(IOException ex)
+        catch(GoogleSvc.GoogleSvcException ex)
         {
-            Logger.getLogger(GOOGLE.class.getName()).log(Level.SEVERE, args, ex);
+            ev.sendError(ex.getMessage());
         }
     }
 
@@ -133,20 +101,5 @@ public class GOOGLE implements Command
     public void listen(CommandEvent e)
     {
         //nothing to do here
-    }
-    
-    public static void updateGoogleKeys()
-    {
-        String key = Conf.conf.getProperty("GOOGLE_API_KEY");
-        String cx = Conf.conf.getProperty("GOOGLE_CX_ID");
-        if(key!=null && cx!=null && !key.trim().isEmpty() && !cx.trim().isEmpty())
-        {
-            GOOGLE_KEY = key.trim();
-            GOOGLE_CX_ID = cx.trim();
-        }
-        else
-        {
-            throw new RuntimeException("Google keys empty");
-        }
     }
 }

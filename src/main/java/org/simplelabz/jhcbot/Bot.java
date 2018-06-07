@@ -25,7 +25,7 @@ public class Bot
         //General bot commands
         "h", "help", "info", "about", "afk", "amsg", "msg", "bsh", "lschan", "lsadmins", "invite", "lsbots", "time",
         "wttr", "ipinfo", "ping", "uptime", "echo", "g", "google", "jokes", "ytb", "hcstats", "privmsg","talk",
-        "urban","math", "js", "glite", "sources","wiki",
+        "urban","math", "js", "glite", "sources","wiki","qloc",
         //Admin bot commands
         "killbot","mkadmin", "rmadmin", "ban", "unban", "enable" , "disable", "leave", "stop","calm","health"
     };
@@ -147,6 +147,7 @@ public class Bot
                 public void afterParsing(ParsedData dat)
                 {
                     process(dat);
+                    System.gc();
                 }
             });
             chat.connect();
@@ -291,7 +292,6 @@ public class Bot
             }, event.getCommand().call());
             run.start();
         }
-        System.gc();
     }
     
     /*

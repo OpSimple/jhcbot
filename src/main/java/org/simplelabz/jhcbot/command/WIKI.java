@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.simplelabz.jhcbot.Conf;
 import org.simplelabz.jhcbot.command.event.CommandEvent;
 
 /**
@@ -32,7 +33,7 @@ public class WIKI implements Command
     @Override
     public String desc()
     {
-        return "Wikipedia ";
+        return "Wikipedia article Usage: "+Conf.TRIG+call()+" [article]";
     }
 
     @Override
@@ -61,7 +62,7 @@ public class WIKI implements Command
         
         try
         {
-            Document doc = Jsoup.connect("https://en.wikipedia.org/wiki/"+URLEncoder.encode(args, "UTF-8")).get();
+            Document doc = Jsoup.connect("https://en.wikipedia.org/wiki/"+URLEncoder.encode(args.trim().replaceAll(" +", "_"), "UTF-8")).get();
             send = send+"["+doc.title()+"]\r\r";
             Element cont = doc.select("div.mw-parser-output p").first();
             send = send+cont.text();
