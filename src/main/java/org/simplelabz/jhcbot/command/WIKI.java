@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.simplelabz.jhcbot.Conf;
 import org.simplelabz.jhcbot.command.event.CommandEvent;
 
