@@ -1,6 +1,6 @@
 # Java hack.chat Bot
 A simple bot for https://hack.chat/ in java
-
+Take a look at this bot running on https://hack.chat/?programming and type `-h`.
 
 ## Download
 Download the latest executable jar [JHCBot latest](https://github.com/OpSimple/jhcbot/releases/latest)
