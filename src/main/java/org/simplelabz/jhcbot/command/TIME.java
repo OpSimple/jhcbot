@@ -44,7 +44,7 @@ public class TIME implements Command
     {
         String args = ev.getArgsStr().trim();
         TimeZone zone = TimeZone.getTimeZone(args);
-        if(!zone.getID().equals(args))
+        if(!"GMT".equals(args) && zone.getID().equals("GMT"))
         {
             try
             {
