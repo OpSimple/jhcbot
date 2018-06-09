@@ -62,10 +62,13 @@ public class WIKI implements Command
         
         try
         {
-            Document doc = Jsoup.connect("https://en.wikipedia.org/wiki/"+URLEncoder.encode(args.trim().replaceAll(" +", "_"), "UTF-8")).get();
-            send = send+"["+doc.title()+"]\r\r";
-            Element cont = doc.select("div.mw-parser-output p").first();
-            send = send+cont.text();
+            Connection con = Jsoup.connect("https://en.wikipedia.org/wiki/"+URLEncoder.encode(args.trim().replaceAll(" +", "_"), "UTF-8"));
+            Connection.Response resp = con.execute();
+            Document doc = resp.parse();
+            send = send+"["+doc.title()+"]\r";
+            String text = doc.select("div.mw-parser-output p").first().text();
+            if(text.length()>500)text = text.substring(0, (MAX_CHARS-3))+"...";
+            send = send+text+"\r"+resp.url();
             ev.send(send);
         }
         catch(IOException ex)
